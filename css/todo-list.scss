@@ -19,8 +19,10 @@
         display: flex;
         align-items: flex-start;
         gap: 0.5rem;
-        border-bottom: 1px solid #dfdfe1;
-        padding: 0.5rem 0;
+        // border-bottom: 1px solid #dfdfe1;
+        background: #f0f0f1;
+        border-radius: 0.3rem;
+        padding: 0.5rem;
         margin: 0;
     }
 }
@@ -28,6 +30,10 @@
 .task{
     flex-grow: 1;
     margin-top: -0.1rem;
+
+    &:hover{
+        cursor: grab;
+    }
 }
 
 .task-rename-field{
@@ -52,6 +58,7 @@
     // Style for the custom checkbox when checked
     &:checked {
         background-image: url('../img/check.svg');
+        background-color: transparent;
         background-size: cover;
 
         // Style for the checkmark when checkbox is checked
