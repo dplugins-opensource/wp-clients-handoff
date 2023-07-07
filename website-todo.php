@@ -37,13 +37,12 @@ function wtd_custom_admin_widget_content() {
         }
     }
 }">
-  <h1>To-Do List</h1>
 
   <input type="text" x-model="newTask" placeholder="Enter a new task">
-  <button x-on:click="addTask">Add Task</button>
+  <button x-on:click="addTask" class="button button-primary">Add Task</button>
 
-  <h2>Unfinished</h2>
-  <ul>
+  <!-- <h4>Unfinished</h4> -->
+  <ul class="tasks-list unfinished-tasks">
     <template x-for="(task, index) in unfinishedTasks" :key="index">
       <li>
         <input type="checkbox" x-model="task.completed" x-on:change="toggleTask(task, 'unfinished')">
@@ -57,8 +56,8 @@ function wtd_custom_admin_widget_content() {
     </template>
   </ul>
 
-  <h2>Finished</h2>
-  <ul>
+  <!-- <h4>Finished</h4> -->
+  <ul class="tasks-list finished-tasks">
     <template x-for="(task, index) in finishedTasks" :key="index">
       <li>
         <input type="checkbox" x-model="task.completed" x-on:change="toggleTask(task, 'finished')">
