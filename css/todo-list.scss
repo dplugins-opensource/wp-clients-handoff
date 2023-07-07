@@ -89,9 +89,12 @@
 }
 
 #export-import{
+    border-top: 1px solid rgb(227, 227, 227);
+    padding-top: 1rem;
     display: flex;
     gap: 0.3rem;
     justify-content: flex-end;
+    margin: 2rem 0 0 0;
 }
 
 #import-todo-popup--bg{
