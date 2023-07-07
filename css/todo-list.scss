@@ -29,7 +29,7 @@
 
 .task{
     flex-grow: 1;
-    margin-top: -0.1rem;
+    margin-top: 0.1rem;
 
     &:hover{
         cursor: grab;
@@ -54,6 +54,7 @@
     cursor: pointer;
     border: 0;
     box-shadow: none;
+    margin: 0rem;
 
     // Style for the custom checkbox when checked
     &:checked {
