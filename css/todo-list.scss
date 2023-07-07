@@ -1,6 +1,7 @@
 #add-task{
     display: flex;    
     gap: 0.3rem;
+    margin: 1rem 0;
 
     input{
         flex-grow: 1;
@@ -10,18 +11,24 @@
 .tasks-list{
     display: grid;
     gap: 0.3rem;
+    margin: 0;
 
 
     li{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 0.5rem;
-        border-bottom: 1px solid #c3c4c7;
-        padding-bottom: 0.3rem;
+        border-bottom: 1px solid #dfdfe1;
+        padding: 0.5rem 0;
+        margin: 0;
     }
 }
 
-.task, 
+.task{
+    flex-grow: 1;
+    margin-top: -0.1rem;
+}
+
 .task-rename-field{
     flex-grow: 1;
 }
@@ -32,46 +39,30 @@
     position: relative;
     appearance: none;
     -webkit-appearance: none;
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 2px solid #ccc;
-    border-radius: 1rem;
+    width: 1.4rem;
+    min-width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 0;
     outline: none;
     cursor: pointer;
-
-    // Style for the checkmark inside the checkbox
-    &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 10px;
-        height: 10px;
-        background-color: white;
-        border-radius: 50%;
-        display: none;
-    }
+    border: 0;
+    box-shadow: none;
 
     // Style for the custom checkbox when checked
     &:checked {
-        background-color: #55b555;
-        border-color: #55b555;
+        background-image: url('../img/check.svg');
+        background-size: cover;
 
         // Style for the checkmark when checkbox is checked
         &::before {
-            display: block;
+            display: none;
         }
     }
 
     // Style for the custom checkbox when unchecked
     &:not(:checked) {
         background-color: transparent;
-        border-color: #ccc;
+        background-image: url('../img/uncheck.svg');
+        background-size: cover;
     }
-}
-
-// Style for the task rename field
-.tasks-list .task-rename-field {
-    display: none;
 }
