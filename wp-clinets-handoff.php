@@ -107,8 +107,40 @@ function wtd_custom_admin_widget_content() {
     </ul>
 </div>
 
+<div id="export-import">
+    <button id="export-todo">Export</button>
+    <button id="import-todo">import</button>
+
+    <div id="import-todo-popup--bg">
+        <div id="import-todo-popup">
+            <button id="close--import-todo-popup--bg">Close</button>
+            <div id="import-todo-drop">Drop JSON File here</div>
+            <button>Import</button>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.3/cdn.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
+
+<script>
+    jQuery(document).ready(function($) {
+  // Function to handle import button click
+  function handleImportButtonClick() {
+    $('#import-todo-popup--bg').css('display', 'flex');
+  }
+
+  // Function to handle close button click
+  function handleCloseButtonClick() {
+    $('#import-todo-popup--bg').css('display', 'none');
+  }
+
+  // Add event listeners to the import and close buttons
+  $('#import-todo').on('click', handleImportButtonClick);
+  $('#close--import-todo-popup--bg').on('click', handleCloseButtonClick);
+});
+
+</script>
 
     <?php
 }
