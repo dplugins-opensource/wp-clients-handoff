@@ -42,6 +42,7 @@ function wtd_custom_admin_widget_content() {
             });
             this.newTask = '';
         }
+        this.initSortable();
     },
     toggleTask(task, group) {
         if (group === 'unfinished') {
@@ -53,6 +54,7 @@ function wtd_custom_admin_widget_content() {
             this.unfinishedTasks.push(task);
             this.finishedTasks.splice(this.finishedTasks.indexOf(task), 1);
         }
+        this.initSortable();
     },
     deleteTask(task, group) {
         if (group === 'unfinished') {
@@ -60,48 +62,53 @@ function wtd_custom_admin_widget_content() {
         } else if (group === 'finished') {
             this.finishedTasks.splice(this.finishedTasks.indexOf(task), 1);
         }
+        this.initSortable();
+    },
+    initSortable() {
+        new Sortable(document.querySelector('.unfinished-tasks'), {
+            animation: 150,
+        });
+        new Sortable(document.querySelector('.finished-tasks'), {
+            animation: 150,
+        });
     }
 }">
-
     <div id="add-task">
         <input type="text" x-model="newTask" placeholder="Enter a new task">
         <button x-on:click="addTask" class="button button-primary">Add Task</button>
     </div>
 
-  <!-- <h4>Unfinished</h4> -->
-  <ul class="tasks-list unfinished-tasks">
-    <template x-for="(task, index) in unfinishedTasks" :key="index">
-      <li>
-        <input type="checkbox" x-model="task.completed" x-on:change="toggleTask(task, 'unfinished')">
+    <ul class="tasks-list unfinished-tasks">
+        <template x-for="(task, index) in unfinishedTasks" :key="index">
+            <li>
+                <input type="checkbox" x-model="task.completed" x-on:change="toggleTask(task, 'unfinished')">
 
-        <span class="task" x-show="!task.isEditing" x-text="task.name" :class="{ 'line-through': task.completed }"></span>
-        <input class="task-edit" type="text" x-show="task.isEditing" x-model="task.name" x-on:keydown.enter="task.isEditing = false">
+                <span class="task" x-show="!task.isEditing" x-text="task.name" :class="{ 'line-through': task.completed }"></span>
+                <input class="task-edit" type="text" x-show="task.isEditing" x-model="task.name" x-on:keydown.enter="task.isEditing = false">
 
-        <button x-text="task.isEditing ? 'Save' : 'Rename'" x-on:click="task.isEditing = !task.isEditing"></button>
-        <button x-on:click="deleteTask(task, 'unfinished')">Delete</button>
-      </li>
-    </template>
-  </ul>
+                <button x-text="task.isEditing ? 'Save' : 'Rename'" x-on:click="task.isEditing = !task.isEditing"></button>
+                <button x-on:click="deleteTask(task, 'unfinished')">Delete</button>
+            </li>
+        </template>
+    </ul>
 
-  <!-- <h4>Finished</h4> -->
-  <ul class="tasks-list finished-tasks">
-    <template x-for="(task, index) in finishedTasks" :key="index">
-      <li>
-        <input type="checkbox" x-model="task.completed" x-on:change="toggleTask(task, 'finished')">
+    <ul class="tasks-list finished-tasks">
+        <template x-for="(task, index) in finishedTasks" :key="index">
+            <li>
+                <input type="checkbox" x-model="task.completed" x-on:change="toggleTask(task, 'finished')">
 
-        <span class="task" x-show="!task.isEditing" x-text="task.name" :class="{ 'line-through': task.completed }"></span>
-        <input type="text" x-show="task.isEditing" x-model="task.name" x-on:keydown.enter="task.isEditing = false">
+                <span class="task" x-show="!task.isEditing" x-text="task.name" :class="{ 'line-through': task.completed }"></span>
+                <input class="task-edit" type="text" x-show="task.isEditing" x-model="task.name" x-on:keydown.enter="task.isEditing = false">
 
-        <button x-text="task.isEditing ? 'Save' : 'Rename'" x-on:click="task.isEditing = !task.isEditing"></button>
-        <button x-on:click="deleteTask(task, 'finished')">Delete</button>
-      </li>
-    </template>
-  </ul>
+                <button x-text="task.isEditing ? 'Save' : 'Rename'" x-on:click="task.isEditing = !task.isEditing"></button>
+                <button x-on:click="deleteTask(task, 'finished')">Delete</button>
+            </li>
+        </template>
+    </ul>
 </div>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.3/cdn.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.3/cdn.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
 
     <?php
 }
-
