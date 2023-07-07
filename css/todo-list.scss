@@ -1,7 +1,6 @@
 #add-task{
     display: flex;    
     gap: 0.3rem;
-    margin: 1rem 0;
 
     input{
         flex-grow: 1;
@@ -11,16 +10,14 @@
 .tasks-list{
     display: grid;
     gap: 0.3rem;
-    margin: 0;
 
 
     li{
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        border-bottom: 1px solid #dfdfe1;
-        padding: 0.5rem 0;
-        margin: 0;
+        border-bottom: 1px solid #c3c4c7;
+        padding-bottom: 0.3rem;
     }
 }
 
@@ -35,30 +32,42 @@
     position: relative;
     appearance: none;
     -webkit-appearance: none;
-    width: 1.4rem;
-    height: 1.4rem;
-    border-radius: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid #ccc;
+    border-radius: 1rem;
     outline: none;
     cursor: pointer;
-    border: 0;
-    box-shadow: none;
+
+    // Style for the checkmark inside the checkbox
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        display: none;
+    }
 
     // Style for the custom checkbox when checked
     &:checked {
-        background-image: url('../img/check.svg');
-        background-size: cover;
+        background-color: #55b555;
+        border-color: #55b555;
 
         // Style for the checkmark when checkbox is checked
         &::before {
-            display: none;
+            display: block;
         }
     }
 
     // Style for the custom checkbox when unchecked
     &:not(:checked) {
         background-color: transparent;
-        background-image: url('../img/uncheck.svg');
-        background-size: cover;
+        border-color: #ccc;
     }
 }
 
