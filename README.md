@@ -7,6 +7,8 @@
 ---
 ###  [Thanks for the coffee](https://ko-fi.com/dplugins).
 ---
+###  [Download latest release](https://github.com/dplugins/wp-clients-handoff/releases/).
+---
 
 ### Introducing WPCH Main: Your Ultimate Todo List Manager for WordPress!
 
