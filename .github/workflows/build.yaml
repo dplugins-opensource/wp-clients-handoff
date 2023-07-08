@@ -27,7 +27,7 @@ jobs:
 
       - name: Create release zip file
         run: |
-          zip -r plugin-name.zip . -x "@(.distignore|.git/*|*.zip)"
+          find . -type f -not -path './.git/*' -not -path './*.zip' -print0 | xargs -0 zip -q plugin-name.zip
 
       - name: Create release
         id: create_release
