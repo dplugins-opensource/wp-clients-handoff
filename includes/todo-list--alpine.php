@@ -45,92 +45,157 @@ class WPCH_main {
         ));
         wp_enqueue_script('WPCH_ajax_scripts');
 
-        // Retrieve tasks and pass them to JavaScript
-        $tasks = $this->getTasks();
-        wp_localize_script('WPCH_ajax_scripts', 'WPCH_tasks', $tasks);
+            // Retrieve tasks and pass them to JavaScript
+    $tasks = $this->getTasks();
+    add_action('wp_print_scripts', function() use ($tasks) {
+        echo "<script>var WPCH_tasks = " . wp_json_encode($tasks) . ";</script>";
+    });
     }
+
 
     public function WPCH_custom_admin_widget_content()
     {
         // Widget content goes here
         ?>
-
-<div x-data="{
-    tasks: WPCH_tasks,
-    newTask: '',
-    addTask() {
-        if (this.newTask.trim() !== '') {
-            this.tasks.push({
-                name: this.newTask,
-                completed: false,
-                isEditing: false,
-            });
-            this.newTask = '';
-            this.saveTasks();
-        }
-    },
-    deleteTask(index) {
-        this.tasks.splice(index, 1);
-        this.saveTasks();
-    },
-    renameTask(task) {
-        task.isEditing = true;
-    },
-    saveTask(task) {
-        task.isEditing = false;
-        this.saveTasks();
-    },
-    saveTasks() {
-        const tasksData = this.tasks.map((task, index) => ({
-            name: task.name,
-            completed: task.completed,
-            task_order: index + 1
-        }));
-
-        const formData = new FormData();
-        formData.append('action', 'WPCH_saveTask');
-        formData.append('tasks', JSON.stringify(tasksData));
-        formData.append('verify_nonce', WPCH_ajax.WPCH_nonce);
-
-        fetch(WPCH_ajax.ajaxurl, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Tasks saved successfully.');
-            } else {
-                console.error('Failed to save tasks.');
-            }
-        })
-        .catch(error => {
-            console.error('An error occurred:', error);
-        });
-    },
-}">
-    <div id="add-task">
-        <input type="text" x-model="newTask" placeholder="Enter a new task" x-on:keydown.enter="addTask">
-    </div>
-
-    <ul class="tasks-list">
-        <template x-for="(task, index) in tasks" :key="index">
-            <li>
-                <input type="checkbox" x-model="task.completed">
-
-                <span class="task" x-show="!task.isEditing" x-text="task.name" :class="{ 'line-through': task.completed }"></span>
-                <input class="task-edit" type="text" x-show="task.isEditing" x-model="task.name" x-on:keydown.enter="saveTask(task)">
-
-                <button x-show="!task.isEditing" x-on:click="renameTask(task)">Rename</button>
-                <button x-show="task.isEditing" x-on:click="saveTask(task)">Save</button>
-                <button x-on:click="deleteTask(index)">Delete</button>
-            </li>
-        </template>
-    </ul>
-</div>
+        <div x-data="{
+            tasks: WPCH_tasks,
+            newTask: '',
+            addTask() {
+                if (this.newTask.trim() !== '') {
+                    this.tasks.push({
+                        name: this.newTask,
+                        completed: false,
+                        isEditing: false,
+                    });
+                    this.newTask = '';
+                    this.saveTasks();
+                }
+            },
+            deleteTask(index) {
+                this.tasks.splice(index, 1);
+                this.saveTasks();
+            },
+            renameTask(task) {
+                task.isEditing = true;
+            },
+            saveTask(task) {
+                task.isEditing = false;
+                this.saveTasks();
+            },
+            saveTasks() {
+                const tasksData = this.tasks.map((task, index) => ({
+                    name: task.name,
+                    completed: task.completed ? '1' : '0',
+                    task_order: index + 1
+                }));
+    
+                const formData = new FormData();
+                formData.append('action', 'WPCH_saveTask');
+                formData.append('tasks', JSON.stringify(tasksData));
+                formData.append('verify_nonce', WPCH_ajax.WPCH_nonce);
+    
+                fetch(WPCH_ajax.ajaxurl, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Tasks saved successfully.');
+                    } else {
+                        console.error('Failed to save tasks.');
+                    }
+                })
+                .catch(error => {
+                    console.error('An error occurred:', error);
+                });
+            },
+            init() {
+                this.tasks.forEach(task => {
+    task.completed = task.completed === '1'; // Convert the completed value to boolean
+    task.isEditing = false;
+    
+    // Add the 'status completed' class if the task is completed
+    task.statusClass = task.completed ? 'status completed' : 'status';
+});
 
 
-    <?php
+}
+
+        }" x-init="init">
+            <div id="add-task">
+                <input type="text" x-model="newTask" placeholder="Enter a new task" x-on:keydown.enter="addTask">
+            </div>
+    
+            <ul class="tasks-list">
+                <template x-for="(task, index) in tasks" :key="index">
+                    <li>
+                    <input type="checkbox" x-model="task.completed" x-bind:class="task.statusClass">
+
+
+                        <span class="task" x-show="!task.isEditing" x-text="task.name" :class="{ 'line-through': task.completed }"></span>
+                        <input class="task-edit" type="text" x-show="task.isEditing" x-model="task.name" x-on:keydown.enter="saveTask(task)">
+    
+                        <button x-show="!task.isEditing" x-on:click="renameTask(task)">Rename</button>
+                        <button x-show="task.isEditing" x-on:click="saveTask(task)">Save</button>
+                        <button x-on:click="deleteTask(index)">Delete</button>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    
+        <div id="export-import">
+            <span class="downloading" style="display:none;"></span>
+            <button id="export-todo">Export</button>
+            <button id="import-todo">import</button>
+    
+            <div id="import-todo-popup--bg">
+                <div id="import-todo-popup">
+                    <button id="close--import-todo-popup--bg">Close</button>
+                    <div id="import-todo-drop">
+                        <form method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" class="dropzone" id="json-dropzone">
+                            <input style="display:none;" type="hidden" name="action" value="upload_tasks_json">
+                            <input type="hidden" name="_wpnonce" value="<?php echo wp_create_nonce('upload_tasks_json'); ?>">
+                            <input style="display:none;" type="file" name="json-file">
+                        </form>
+    
+                        <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+                        <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+                        <script>
+                            jQuery.noConflict();
+                            (function($) {
+                                Dropzone.autoDiscover = false;
+                                jQuery(document).ready(function($) {
+                                    // Initialize Dropzone.js
+                                    var myDropzone = new Dropzone("#json-dropzone", {
+                                        url: "<?php echo esc_url(admin_url('admin-ajax.php')); ?>",
+                                        paramName: "json-file",
+                                        acceptedFiles: ".json",
+                                        uploadMultiple: true,
+                                        maxFiles: null,
+                                        parallelUploads: 20,
+                                        clickable: true,
+                                        init: function() {
+                                            /* this.on("sending", function(file, xhr, formData) {
+                                                formData.append("action", "upload_partials");
+                                            }); */
+                                            this.on("success", function(file, response) {
+                                                window.location.href = response;
+                                            });
+                                        }
+                                    });
+                                });
+                            })(jQuery);
+                        </script>
+                    </div>
+                    <button>Import</button>
+                </div>
+            </div>
+        </div>
+    
+        <?php
     }
+    
+    
 
     public function WPCH_saveTask()
     {
