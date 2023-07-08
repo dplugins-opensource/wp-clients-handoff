@@ -1,0 +1,54 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Match any tag that starts with 'v'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Remove folders based on .distignore
+        run: |
+          # Install the 'distignore' npm package
+          npm install -g distignore
+
+          # Generate a list of files/folders to exclude based on .distignore
+          EXCLUDES=$(distignore list)
+
+          # Remove the excluded folders
+          for EXCLUDE in $EXCLUDES
+          do
+            if [ -d "$EXCLUDE" ]
+            then
+              rm -rf "$EXCLUDE"
+            fi
+          done
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload release artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: . # Assuming the release zip file is in the root directory
+          asset_name: plugin-name.zip # Change 'plugin-name' to your actual plugin name
+          asset_content_type: application/zip
