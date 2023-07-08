@@ -3,8 +3,8 @@
 Plugin Name: WP Clients Handoff
 Plugin URI: https://example.com/
 Description: Admin widget to manage client handoff tasks.
-Version: 1.0
-Author: dPlugins
+Version: 0.1.0
+Author: DPlugins
 Author URI: https://dplugins.com/
 Text Domain: wpch
 License: GPL2
