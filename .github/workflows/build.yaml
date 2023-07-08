@@ -25,6 +25,10 @@ jobs:
             fi
           done <<< "$DISTIGNORE_CONTENT"
 
+      - name: Create release zip file
+        run: |
+          zip -r plugin-name.zip . -x "@(.distignore|.git/*|*.zip)"
+
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -44,6 +48,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: . # Assuming the release zip file is in the root directory
-          asset_name: plugin-name.zip # Change 'plugin-name' to your actual plugin name
+          asset_path: plugin-name.zip
+          asset_name: plugin-name.zip
           asset_content_type: application/zip
