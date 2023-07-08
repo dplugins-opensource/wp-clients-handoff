@@ -55,69 +55,79 @@ class WPCH_main {
         // Widget content goes here
         ?>
 
-        <div x-data="{
-            tasks: WPCH_tasks,
-            newTask: '',
-            addTask() {
-                if (this.newTask.trim() !== '') {
-                    this.tasks.push({
-                        name: this.newTask,
-                        completed: false,
-                        isEditing: false,
-                    });
-                    this.newTask = '';
-                    this.saveTasks();
-                }
-            },
-            deleteTask(index) {
-                this.tasks.splice(index, 1);
-                this.saveTasks();
-            },
-            saveTasks() {
-                const tasksData = this.tasks.map((task, index) => ({
-                    name: task.name,
-                    completed: task.completed,
-                    task_order: index + 1
-                }));
+<div x-data="{
+    tasks: WPCH_tasks,
+    newTask: '',
+    addTask() {
+        if (this.newTask.trim() !== '') {
+            this.tasks.push({
+                name: this.newTask,
+                completed: false,
+                isEditing: false,
+            });
+            this.newTask = '';
+            this.saveTasks();
+        }
+    },
+    deleteTask(index) {
+        this.tasks.splice(index, 1);
+        this.saveTasks();
+    },
+    renameTask(task) {
+        task.isEditing = true;
+    },
+    saveTask(task) {
+        task.isEditing = false;
+        this.saveTasks();
+    },
+    saveTasks() {
+        const tasksData = this.tasks.map((task, index) => ({
+            name: task.name,
+            completed: task.completed,
+            task_order: index + 1
+        }));
 
-                const formData = new FormData();
-                formData.append('action', 'WPCH_saveTask');
-                formData.append('tasks', JSON.stringify(tasksData));
-                formData.append('verify_nonce', WPCH_ajax.WPCH_nonce);
+        const formData = new FormData();
+        formData.append('action', 'WPCH_saveTask');
+        formData.append('tasks', JSON.stringify(tasksData));
+        formData.append('verify_nonce', WPCH_ajax.WPCH_nonce);
 
-                fetch(WPCH_ajax.ajaxurl, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Tasks saved successfully.');
-                    } else {
-                        console.error('Failed to save tasks.');
-                    }
-                })
-                .catch(error => {
-                    console.error('An error occurred:', error);
-                });
-            },
-        }">
-            <div id="add-task">
-                <input type="text" x-model="newTask" placeholder="Enter a new task" x-on:keydown.enter="addTask">
-            </div>
+        fetch(WPCH_ajax.ajaxurl, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Tasks saved successfully.');
+            } else {
+                console.error('Failed to save tasks.');
+            }
+        })
+        .catch(error => {
+            console.error('An error occurred:', error);
+        });
+    },
+}">
+    <div id="add-task">
+        <input type="text" x-model="newTask" placeholder="Enter a new task" x-on:keydown.enter="addTask">
+    </div>
 
-            <ul class="tasks-list">
-                <template x-for="(task, index) in tasks" :key="index">
-                    <li>
-                        <input type="checkbox" x-model="task.completed">
+    <ul class="tasks-list">
+        <template x-for="(task, index) in tasks" :key="index">
+            <li>
+                <input type="checkbox" x-model="task.completed">
 
-                        <span class="task" x-text="task.name" :class="{ 'line-through': task.completed }"></span>
-                        <input class="task-edit" type="text" x-model="task.name">
+                <span class="task" x-show="!task.isEditing" x-text="task.name" :class="{ 'line-through': task.completed }"></span>
+                <input class="task-edit" type="text" x-show="task.isEditing" x-model="task.name" x-on:keydown.enter="saveTask(task)">
 
-                        <button x-on:click="deleteTask(index)">Delete</button>
-                    </li>
-                </template>
-            </ul>
-        </div>
+                <button x-show="!task.isEditing" x-on:click="renameTask(task)">Rename</button>
+                <button x-show="task.isEditing" x-on:click="saveTask(task)">Save</button>
+                <button x-on:click="deleteTask(index)">Delete</button>
+            </li>
+        </template>
+    </ul>
+</div>
+
 
     <?php
     }
