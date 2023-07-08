@@ -15,20 +15,15 @@ jobs:
 
       - name: Remove folders based on .distignore
         run: |
-          # Install the 'distignore' npm package
-          npm install -g distignore
+          # Read the .distignore file and store the contents in a variable
+          DISTIGNORE_CONTENT=$(cat .distignore)
 
-          # Generate a list of files/folders to exclude based on .distignore
-          EXCLUDES=$(distignore list)
-
-          # Remove the excluded folders
-          for EXCLUDE in $EXCLUDES
-          do
-            if [ -d "$EXCLUDE" ]
-            then
+          # Remove the excluded folders based on .distignore rules
+          while IFS= read -r EXCLUDE; do
+            if [ -d "$EXCLUDE" ]; then
               rm -rf "$EXCLUDE"
             fi
-          done
+          done <<< "$DISTIGNORE_CONTENT"
 
       - name: Create release
         id: create_release
