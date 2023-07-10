@@ -88,20 +88,32 @@ jQuery(document).ready(function($) {
     $(document).on("click", "#addTask", function(){
         var newTask = $("#newTask").val();
         if(newTask != ""){
-            $(".tasks-list").append('<li><input type="checkbox" class="status"><span class="task">'+newTask+'</span><input style="display:none;" class="task-edit" type="text" value="'+newTask+'"><button class="rename">Rename</button><button class="delete">Delete</button></li>');
+            $(".tasks-list.unfinished").append('<li><input type="checkbox" class="status"><span class="task">'+newTask+'</span><input style="display:none;" class="task-edit" type="text" value="'+newTask+'"><button class="rename">Rename</button><button class="delete">Delete</button></li>');
+            $("#newTask").val("");
             initiate_sortable();
             setTimeout(() => {
                 prepare_tasks_list();
             }, 100);
         }
     });
+
+    // press add task button
+    $('#newTask').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            $("#addTask").trigger("click");
+        }
+    });
     
     // set task as completed
     $(document).on("change", ".status", function(){
+        var parentObj = $(this).parents("li");
         if($(this).is(":checked")){
             $(this).addClass("completed");
+            $('.finished').append(parentObj);
         } else {
             $(this).removeClass("completed");
+            $('.unfinished').append(parentObj);
         }
         prepare_tasks_list();
     });

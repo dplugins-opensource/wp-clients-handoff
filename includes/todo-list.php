@@ -57,20 +57,24 @@ class WPCH_main {
                 <button class="button button-primary" id="addTask">Add Task</button>
             </div>
         
-            <ul class="tasks-list">
-                <?php
+            <?php
+                $unfishished_list = '';
+                $fishished_list = '';
                 global $wpdb;
                 $wpch_tasks = $wpdb->prefix . "wpch_tasks";
                 $tasks = $wpdb->get_results("SELECT * FROM $wpch_tasks ORDER BY task_order ASC", OBJECT);
                 if(!empty($tasks)){
-                    $html = '';
                     foreach($tasks as $task){
-                        $html .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.$task->name.'</span><input style="display:none;" class="task-edit" type="text" value="'.$task->name.'"><button class="rename">Rename</button><button class="delete">Delete</button></li>';
+                        if($task->completed == 1){
+                            $fishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.$task->name.'</span><input style="display:none;" class="task-edit" type="text" value="'.$task->name.'"><button class="rename">Rename</button><button class="delete">Delete</button></li>';
+                        } else {
+                            $unfishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.$task->name.'</span><input style="display:none;" class="task-edit" type="text" value="'.$task->name.'"><button class="rename">Rename</button><button class="delete">Delete</button></li>';
+                        }
                     }
-                    echo $html;
                 }
-                ?>
-            </ul>
+            ?>
+            <ul class="tasks-list unfinished"><?php echo $unfishished_list; ?></ul>
+            <ul class="tasks-list finished"><?php echo $fishished_list; ?></ul>
         </div>
     
         <div id="export-import">

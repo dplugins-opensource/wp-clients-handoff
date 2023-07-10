@@ -16,4 +16,3 @@ define('WPCH_DIR',	plugin_dir_path(__FILE__));
 define('WPCH_PLUGINVERSION',  '0.1.1');
 
 require_once WPCH_DIR . 'includes/todo-list.php';
-// require_once WPCH_DIR . 'includes/todo-list--alpine.php';
