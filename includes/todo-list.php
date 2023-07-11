@@ -55,7 +55,7 @@ class WPCH_main {
             <div id="add-task">
                 <input type="text" id="newTask" placeholder="Type and hit Enter">
             </div>
-        
+            
             <?php
                 $unfishished_list = '';
                 $fishished_list = '';

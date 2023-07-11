@@ -129,12 +129,14 @@ jQuery(document).ready(function($) {
             $(".task", currObjParent).show();
             $(".task-edit", currObjParent).hide();
             $(currObj).html("Rename").removeClass("renaming");
+            $(currObjParent).removeClass("editing");
             setTimeout(() => {
                 prepare_tasks_list();
             }, 100);
         } else {
             $(".task", currObjParent).hide();
             $(".task-edit", currObjParent).show();
+            $(currObjParent).addClass("editing");
             $(currObj).html("Save").addClass("renaming");
         }
     });
