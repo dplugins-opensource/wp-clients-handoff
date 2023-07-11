@@ -53,8 +53,8 @@ class WPCH_main {
 
         <div>
             <div id="add-task">
-                <input type="text" id="newTask" placeholder="Enter a new task">
-                <button class="button button-primary" id="addTask">Add Task</button>
+                <input type="text" id="newTask" placeholder="Type and hit Enter">
+                <button class="button button-primary hidden" id="addTask">Add Task</button>
             </div>
         
             <?php
@@ -66,9 +66,9 @@ class WPCH_main {
                 if(!empty($tasks)){
                     foreach($tasks as $task){
                         if($task->completed == 1){
-                            $fishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.$task->name.'</span><input style="display:none;" class="task-edit" type="text" value="'.$task->name.'"><button class="rename">Rename</button><button class="delete">Delete</button></li>';
+                            $fishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.$task->name.'</span><input style="display:none;" class="task-edit" type="text" value="'.$task->name.'"><button class="rename button button-small">Rename</button><button class="delete button button-small">Delete</button></li>';
                         } else {
-                            $unfishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.$task->name.'</span><input style="display:none;" class="task-edit" type="text" value="'.$task->name.'"><button class="rename">Rename</button><button class="delete">Delete</button></li>';
+                            $unfishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.$task->name.'</span><input style="display:none;" class="task-edit" type="text" value="'.$task->name.'"><button class="rename button button-small">Rename</button><button class="delete button button-small">Delete</button></li>';
                         }
                     }
                 }
@@ -79,12 +79,12 @@ class WPCH_main {
     
         <div id="export-import">
             <span class="downloading" style="display:none;"></span>
-            <button id="export-todo">Export</button>
-            <button id="import-todo">import</button>
+            <button class="button button-small" id="export-todo">Export</button>
+            <button class="button button-small" id="import-todo">import</button>
         
             <div id="import-todo-popup--bg">
                 <div id="import-todo-popup">
-                    <button id="close--import-todo-popup--bg">Close</button>
+                    <button class="button" id="close--import-todo-popup--bg">Close</button>
                     <div id="import-todo-drop">
                         <form method="post" enctype="multipart/form-data" action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" class="dropzone" id="json-dropzone">
                         <input style="display:none;" type="hidden" name="action" value="upload_tasks_json">
@@ -128,7 +128,7 @@ class WPCH_main {
                         })(jQuery);
                     </script>
                     </div>
-                    <button>Import</button>
+                    <button class="button button-primary">Import</button>
                 </div>
             </div>
         </div>
