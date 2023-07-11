@@ -54,7 +54,6 @@ class WPCH_main {
         <div>
             <div id="add-task">
                 <input type="text" id="newTask" placeholder="Type and hit Enter">
-                <button class="button button-primary hidden" id="addTask">Add Task</button>
             </div>
         
             <?php
