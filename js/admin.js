@@ -84,24 +84,20 @@ jQuery(document).ready(function($) {
     $('#import-todo').on('click', handleImportButtonClick);
     $('#close--import-todo-popup--bg').on('click', handleCloseButtonClick);
 
-    // add new task
-    $(document).on("click", "#addTask", function(){
-        var newTask = $("#newTask").val();
-        if(newTask != ""){
-            $(".tasks-list.unfinished").append('<li><input type="checkbox" class="status"><span class="task">'+newTask+'</span><input style="display:none;" class="task-edit" type="text" value="'+newTask+'"><button class="rename">Rename</button><button class="delete">Delete</button></li>');
-            $("#newTask").val("");
-            initiate_sortable();
-            setTimeout(() => {
-                prepare_tasks_list();
-            }, 100);
-        }
-    });
-
     // press add task button
     $('#newTask').keypress(function(event){
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            $("#addTask").trigger("click");
+            // add new task
+            var newTask = $("#newTask").val();
+            if(newTask != ""){
+                $(".tasks-list.unfinished").append('<li><input type="checkbox" class="status"><span class="task">'+newTask+'</span><input style="display:none;" class="task-edit" type="text" value="'+newTask+'"><button class="rename">Rename</button><button class="delete">Delete</button></li>');
+                $("#newTask").val("");
+                initiate_sortable();
+                setTimeout(() => {
+                    prepare_tasks_list();
+                }, 100);
+            }
         }
     });
     
