@@ -65,9 +65,9 @@ class WPCH_main {
                 if(!empty($tasks)){
                     foreach($tasks as $task){
                         if($task->completed == 1){
-                            $fishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.esc_attr($task->name).'</span><input style="display:none;" class="task-edit" type="text" value="'.esc_attr($task->name).'"><button class="rename button button-small">Rename</button><button class="delete button button-small">Delete</button></li>';
+                            $fishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.esc_attr($task->name).'</span><input style="display:none;" class="task-edit" type="text" value="'.esc_attr($task->name).'"><div class="actions"><button class="rename button button-small">Rename</button><button class="delete button button-small">Delete</button></div></li>';
                         } else {
-                            $unfishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.esc_attr($task->name).'</span><input style="display:none;" class="task-edit" type="text" value="'.esc_attr($task->name).'"><button class="rename button button-small">Rename</button><button class="delete button button-small">Delete</button></li>';
+                            $unfishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.esc_attr($task->name).'</span><input style="display:none;" class="task-edit" type="text" value="'.esc_attr($task->name).'"><div class="actions"><button class="rename button button-small">Rename</button><button class="delete button button-small">Delete</button></div></li>';
                         }
                     }
                 }
