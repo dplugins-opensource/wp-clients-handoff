@@ -118,6 +118,13 @@ jQuery(document).ready(function($) {
         prepare_tasks_list();
     });
 
+    // Add this event listener to close the dialog when clicking outside
+    $('#import-todo-popup--bg').on('click', function(event) {
+        if (event.target === this) {
+            handleCloseButtonClick();
+        }
+    });
+
     // rename task
     $(document).on("click", ".rename", function(e){
         var currObj = $(this);
