@@ -2,17 +2,17 @@
 
 ## Never forget what you need to do on your website
 
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-01.png "Title")
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-02.png "Title")
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-03.png "Title")
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-04.png "Title")
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-05.png "Title")
-
 ---
 ###  [Thanks for the coffee. Donate on Ko-fi](https://ko-fi.com/dplugins). 
 ---
 ###  [Download latest release](https://github.com/dplugins/wp-clients-handoff/releases/).
 ---
+
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-01.png "Title")
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-02.png "Title")
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-03.png "Title")
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-04.png "Title")
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-05.png "Title")
 
 ### Introducing your Ultimate Todo List Manager for WordPress!
 
