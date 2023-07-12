@@ -37,10 +37,14 @@
                 background-color: white;
             }
         }
+
+        &:hover  .actions{
+            display: flex;
+        }
     }
 
     .actions{
-        display: flex;
+        display: none;
         gap: 0.5rem;
         position: absolute;
         right: .5rem;
@@ -63,6 +67,12 @@
 
 .task-rename-field{
     flex-grow: 1;
+}
+
+.delete:hover{
+    background: #ffebea !important;
+    border: 1px solid #73062b !important;
+    color: #73062b !important;
 }
 
 
