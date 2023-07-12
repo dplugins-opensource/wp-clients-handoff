@@ -13,17 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Remove folders based on .distignore
+        run: |
+          # Read the .distignore file and store the contents in a variable
+          DISTIGNORE_CONTENT=$(cat .distignore)
+
+          # Remove the excluded folders based on .distignore rules
+          while IFS= read -r EXCLUDE; do
+            if [ -d "$EXCLUDE" ]; then
+              rm -rf "$EXCLUDE"
+            fi
+          done <<< "$DISTIGNORE_CONTENT"
+
       - name: Create release zip file
         run: |
-          find . \
-            -type f \
-            -not -path './.git/*' \
-            -not -path './*.zip' \
-            -not -path './*.tar.gz' \
-            -not -path './repo-img/*' \
-            -not -path './scss/*' \
-            -not -path './README.md' \
-            -print0 | xargs -0 zip -q wp-clients-handoff.zip
+          find . -type f -not -path './.git/*' -not -path './*.zip' -not -path './*.tar.gz' -print0 | xargs -0 zip -q wp-clients-handoff.zip
 
       - name: Create release
         id: create_release
