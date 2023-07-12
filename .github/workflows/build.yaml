@@ -13,18 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Remove folders based on .distignore
-        run: |
-          # Read the .distignore file and store the contents in a variable
-          DISTIGNORE_CONTENT=$(cat .distignore)
-
-          # Remove the excluded folders based on .distignore rules
-          while IFS= read -r EXCLUDE; do
-            if [ -d "$EXCLUDE" ]; then
-              rm -rf "$EXCLUDE"
-            fi
-          done <<< "$DISTIGNORE_CONTENT"
-
       - name: Create release zip file
         run: |
           find . \
