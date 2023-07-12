@@ -65,9 +65,25 @@ class WPCH_main {
                 if(!empty($tasks)){
                     foreach($tasks as $task){
                         if($task->completed == 1){
-                            $fishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.esc_attr($task->name).'</span><input style="display:none;" class="task-edit" type="text" value="'.esc_attr($task->name).'"><div class="actions"><button class="rename button button-small">Rename</button><button class="delete button button-small">Delete</button></div></li>';
+                            $fishished_list .= '<li>
+                                <input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'>
+                                <span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.esc_attr($task->name).'</span>
+                                <input style="display:none;" class="task-edit" type="text" value="'.esc_attr($task->name).'">
+                                <div class="actions">
+                                    <button class="rename"><svg width="24" height="24" ><use xlink:href="#rename-icon"></use></svg></button>
+                                    <button class="delete"><svg width="24" height="24" ><use xlink:href="#delete-icon"></use></svg></button>
+                                </div>
+                            </li>';
                         } else {
-                            $unfishished_list .= '<li><input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'><span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.esc_attr($task->name).'</span><input style="display:none;" class="task-edit" type="text" value="'.esc_attr($task->name).'"><div class="actions"><button class="rename button button-small">Rename</button><button class="delete button button-small">Delete</button></div></li>';
+                            $unfishished_list .= '<li>
+                                <input type="checkbox" class="'.(($task->completed == 1) ? 'completed' : '').' status" '.(($task->completed == 1) ? 'checked' : '').'>
+                                <span class="task '.(($task->completed == 1) ? 'line-through' : '').'">'.esc_attr($task->name).'</span>
+                                <input style="display:none;" class="task-edit" type="text" value="'.esc_attr($task->name).'">
+                                <div class="actions">
+                                    <button class="rename"><svg width="24" height="24" ><use xlink:href="#rename-icon"></use></svg></button>
+                                    <button class="delete"><svg width="24" height="24" ><use xlink:href="#delete-icon"></use></svg></button>
+                                </div>
+                            </li>';
                         }
                     }
                 }
@@ -131,6 +147,15 @@ class WPCH_main {
                 </div>
             </div>
         </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="hidden">
+            <symbol height="24" width="24" viewBox="0 -960 960 960" id="delete-icon">
+                <path fill="currentColor" d="M292.309-140.001q-29.923 0-51.115-21.193-21.193-21.192-21.193-51.115V-720h-40v-59.999H360v-35.384h240v35.384h179.999V-720h-40v507.691q0 30.308-21 51.308t-51.308 21H292.309ZM680-720H280v507.691q0 5.385 3.462 8.847 3.462 3.462 8.847 3.462h375.382q4.616 0 8.463-3.846 3.846-3.847 3.846-8.463V-720ZM376.155-280h59.999v-360h-59.999v360Zm147.691 0h59.999v-360h-59.999v360ZM280-720v520-520Z"/>
+            </symbol>
+            <symbol height="24" width="24" viewBox="0 -960 960 960" id="rename-icon">
+                <path fill="currentColor" d="M490.001-130.001v-71.153l208.923-208.922 71.152 71.152-208.922 208.923h-71.153Zm-360-200v-59.998h280v59.998h-280Zm668.075-36.923-71.152-71.152 29-29q8.692-8.693 21.076-8.693t21.076 8.693l29 29q8.693 8.692 8.693 21.076t-8.693 21.076l-29 29ZM130.001-490.001v-59.998h440v59.998h-440Zm0-160v-59.998h440v59.998h-440Z"/>
+            </symbol>
+        </svg>    
     <?php
     }
     

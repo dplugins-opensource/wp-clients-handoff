@@ -1,6 +1,11 @@
+:root{
+    --todo-space-sm: 0.3rem;
+    --todo-space-md: 0.5rem;
+}
+
 #add-task{
     display: flex;    
-    gap: 0.3rem;
+    gap: var(--todo-space-sm);
     margin: 1rem 0;
 
     input{
@@ -10,18 +15,18 @@
 
 .tasks-list{
     display: grid;
-    gap: 0.3rem;
+    gap: var(--todo-space-sm);
     margin: 0;
-    margin-bottom: 0.3rem;
+    margin-bottom: var(--todo-space-sm);
 
 
     li{
         display: flex;
         align-items: flex-start;
-        gap: 0.5rem;
+        gap: var(--todo-space-md);
         background: #f4f3f3;
-        border-radius: 0.3rem;
-        padding: 0.5rem;
+        border-radius: var(--todo-space-sm);
+        padding: var(--todo-space-md);
         margin: 0;
         position: relative;
 
@@ -29,7 +34,7 @@
             background-color: transparent;
             border: 1px solid #c7c7c7;
             outline: 0;
-            padding: 0.3rem 0.5rem;
+            padding: var(--todo-space-sm) var(--todo-space-md);
             border-radius: 0.2rem;
             cursor: pointer;
 
@@ -45,12 +50,27 @@
 
     .actions{
         display: none;
-        gap: 0.5rem;
+        gap: var(--todo-space-md);
         position: absolute;
-        right: .5rem;
-        top: .5rem;
+        right:var(--todo-space-md);
+        top: var(--todo-space-sm);
+
+        button{
+            padding: 0 var(--todo-space-sm);
+        }
+
+        .renaming{
+            color: #2271b1;
+            border-color: #2271b1;
+            background: #f6f7f7;
+            display: flex;
+            height: 100%;
+            padding: var(--todo-space-sm) var(--todo-space-md);
+        }
     }
 }
+
+
 
 .task-edit{
     flex-grow: 1;
@@ -73,6 +93,19 @@
     background: #ffebea !important;
     border: 1px solid #73062b !important;
     color: #73062b !important;
+}
+
+.editing {
+    .actions{
+        position: relative;
+        right: unset;
+        top: unset;
+        display: block;
+    }
+
+    .delete{
+        display: none;
+    }
 }
 
 
@@ -115,7 +148,7 @@
     border-top: 1px solid rgb(227, 227, 227);
     padding-top: 1rem;
     display: flex;
-    gap: 0.3rem;
+    gap: var(--todo-space-sm);
     justify-content: flex-end;
     margin: 2rem 0 0 0;
 }
