@@ -27,7 +27,18 @@ jobs:
 
       - name: Create release zip file
         run: |
-          find . -type f -not -path './.git/*' -not -path './*.zip' -not -path './*.tar.gz' -print0 | xargs -0 zip -q wp-clients-handoff.zip
+          find . \
+            -type f \
+            -not -path './*.zip' \
+            -not -path './*.tar.gz' \
+            -not -path './remo-img/*' \
+            -not -path './scss/*' \
+            -not -path './.gitignore' \
+            -not -path './.DS_Store' \
+            -not -path './distignore' \
+            -not -path './github' \
+            -not -path './README.md' \
+            -print0 | xargs -0 zip -q wp-clients-handoff.zip
 
       - name: Create release
         id: create_release

@@ -1,4 +1,7 @@
 .github
-scss/
 repo-img/
+scss/
 .DS_Store
+.distignore
+.gitignore
+README.md
