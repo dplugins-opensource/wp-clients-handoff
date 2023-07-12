@@ -41,6 +41,11 @@ But that's not all! WPCH Main takes task management to the next level with advan
 
 ## Changelog
 
-• 0.1.1
+0.1.1
+• Initial release for Todo Widget
 
-Initial release for Todo Widget
+0.2.0
+• Released publicly
+
+0.2.1
+• Fix: Rename is not reloading
