@@ -14,6 +14,10 @@
 ![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-04.png "Title")
 ![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-05.png "Title")
 
+---
+###  [Thanks for the coffee. Donate on Ko-fi](https://ko-fi.com/dplugins). 
+---
+
 ### Introducing your Ultimate Todo List Manager for WordPress!
 
 #### ✅ Manage Tasks Effortlessly with WPCH Main
