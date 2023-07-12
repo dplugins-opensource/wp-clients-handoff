@@ -5,14 +5,13 @@
 ---
 ###  [Thanks for the coffee. Donate on Ko-fi](https://ko-fi.com/dplugins). 
 ---
-###  [Download latest release](https://github.com/dplugins/wp-clients-handoff/releases/).
+###  [Download latest release](https://github.com/DPlugins-Opensource/wp-clients-handoff/releases/).
 ---
 
 ![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-01.png "Title")
 ![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-02.png "Title")
 ![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-03.png "Title")
 ![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-04.png "Title")
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-05.png "Title")
 
 ---
 ###  [Thanks for the coffee. Donate on Ko-fi](https://ko-fi.com/dplugins). 
@@ -34,7 +33,7 @@ But that's not all! WPCH Main takes task management to the next level with advan
 
 ### Installation
 
-1. Download latest release from [Download latest release](https://github.com/dplugins/wp-clients-handoff/releases/).
+1. Download latest release from [Download latest release](https://github.com/DPlugins-Opensource/wp-clients-handoff/releases/).
 2. go to plugins 
 3. Add new
 4. Upload zip
