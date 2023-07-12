@@ -8,10 +8,10 @@
 ###  [Download latest release](https://github.com/DPlugins-Opensource/wp-clients-handoff/releases/).
 ---
 
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-01.png "Title")
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-02.png "Title")
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-03.png "Title")
-![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-04.png "Title")
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-01.png "Preview")
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-02.png "Edit")
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-03.png "Change order")
+![alt text](https://github.com/DPlugins-Opensource/wp-clients-handoff/blob/main/repo-img/image-04-import.png "Import JSON")
 
 ---
 ###  [Thanks for the coffee. Donate on Ko-fi](https://ko-fi.com/dplugins). 
