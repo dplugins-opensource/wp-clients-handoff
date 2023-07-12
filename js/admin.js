@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
     // Function to handle import button click
     function handleImportButtonClick() {
         $('#import-todo-popup--bg').css('display', 'flex');
+        $(".task-edit").val($(".task").text());
     }
 
     // Function to handle close button click
@@ -125,20 +126,23 @@ jQuery(document).ready(function($) {
     $(document).on("click", ".rename", function(e){
         var currObj = $(this);
         var currObjParent = $(this).parents("li");
-        if($(currObj).hasClass("renaming")){
-            $(".task", currObjParent).show();
+        if ($(currObj).hasClass("renaming")) {
+            var newTaskName = $(".task-edit", currObjParent).val();
+            $(".task", currObjParent).text(newTaskName);
             $(".task-edit", currObjParent).hide();
+            $(".task", currObjParent).show();
             $(currObj).html("Rename").removeClass("renaming");
             $(currObjParent).removeClass("editing");
             setTimeout(() => {
-                prepare_tasks_list();
+              prepare_tasks_list();
             }, 100);
-        } else {
+          } else {
+            $(".task-edit", currObjParent).val($(".task", currObjParent).text());
             $(".task", currObjParent).hide();
             $(".task-edit", currObjParent).show();
             $(currObjParent).addClass("editing");
             $(currObj).html("Save").addClass("renaming");
-        }
+          }          
     });
     
     // delete task
