@@ -32,6 +32,14 @@ Stay on top of your tasks with WPCH Main's intuitive features. Add new tasks, ma
 
 But that's not all! WPCH Main takes task management to the next level with advanced capabilities. Export your tasks as a JSON file for seamless sharing and backup, ensuring you never lose important information. Need to import tasks? No problem! WPCH Main allows you to import tasks from a JSON file effortlessly.
 
+### Installation
+
+1. Download latest release from [Download latest release](https://github.com/dplugins/wp-clients-handoff/releases/).
+2. go to plugins 
+3. Add new
+4. Upload zip
+5. Once plugin is activated you will get your new "Website Todo List" widget.
+
 ## Changelog
 
 • 0.1.1
