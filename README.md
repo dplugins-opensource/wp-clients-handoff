@@ -40,6 +40,10 @@ But that's not all! WPCH Main takes task management to the next level with advan
 5. Once plugin is activated you will get your new "Website Todo List" widget.
 
 ## Changelog
+0.3.1
+• If in edit mode hitting the enter will save changes
+• When user press edit input will be focused automaticaly
+
 0.3.0
 • Updated build process (Yaml)
 
