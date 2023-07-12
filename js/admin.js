@@ -154,6 +154,9 @@ jQuery(document).ready(function($) {
     $(document).on("click", "#export-todo", function(){
         $(".downloading").show();
         $(this).prop("disabled", true);
+        var currentDate = new Date();
+        var fileName = "WP-Clients-Handoff-export_" + currentDate.getFullYear() + (currentDate.getMonth() + 1) + currentDate.getDate() + "_" + currentDate.getHours() + currentDate.getMinutes() + currentDate.getSeconds() + ".json";
+        
         $.ajax({
             url: WPCH_ajax.ajaxurl,
             type: "post",
@@ -165,7 +168,7 @@ jQuery(document).ready(function($) {
             success: function (data) {
                 $(this).prop("disabled", false);
                 $("<a />", {
-                    "download": "WP-Clients-Handoff-export.json",
+                    "download": fileName,
                     "href" : "data:application/json," + encodeURIComponent(JSON.stringify(data))
                 }).appendTo("body")
                 .click(function() {
