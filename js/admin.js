@@ -91,7 +91,7 @@ jQuery(document).ready(function($) {
             // add new task
             var newTask = $("#newTask").val();
             if(newTask != ""){
-                $(".tasks-list.unfinished").append('<li><input type="checkbox" class="status"><span class="task">'+newTask+'</span><input style="display:none;" class="task-edit" type="text" value="'+newTask+'"><button class="rename">Rename</button><button class="delete">Delete</button></li>');
+                $(".tasks-list.unfinished").append('<li><input type="checkbox" class="status"><span class="task">'+newTask+'</span><input style="display:none;" class="task-edit" type="text" value="'+newTask+'"><div class="actions"><button class="rename"><svg width="24" height="24" ><use xlink:href="#rename-icon"></use></svg></button><button class="delete"><svg width="24" height="24" ><use xlink:href="#delete-icon"></use></svg></button></div></li>');
                 $("#newTask").val("");
                 initiate_sortable();
                 setTimeout(() => {
