@@ -85,7 +85,7 @@ jQuery(document).ready(function($) {
     $('#import-todo').on('click', handleImportButtonClick);
     $('#close--import-todo-popup--bg').on('click', handleCloseButtonClick);
 
-    // press add task button
+    // enter into add task
     $('#newTask').keypress(function(event){
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
@@ -99,6 +99,28 @@ jQuery(document).ready(function($) {
                     prepare_tasks_list();
                 }, 100);
             }
+        }
+    });
+    
+    // enter into task-edit
+    $(document).on("keypress", ".task-edit", function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            // edit task
+            var currObjParent = $(this).parents("li");
+            $(".rename", currObjParent).trigger("click");
+        }
+    });
+
+    // escape press into task-edit
+    $(document).on("keydown", ".task-edit", function(event){
+        if(event.key == 'Escape'){
+            // revert edit task
+            var currObjParent = $(this).parents("li");
+            $(".task-edit", currObjParent).hide();
+            $(".task", currObjParent).show();
+            $(".rename", currObjParent).html('<svg width="24" height="24" ><use xlink:href="#rename-icon"></use></svg>').removeClass("renaming");
+            $(currObjParent).removeClass("editing");
         }
     });
     
@@ -128,18 +150,21 @@ jQuery(document).ready(function($) {
         var currObjParent = $(this).parents("li");
         if ($(currObj).hasClass("renaming")) {
             var newTaskName = $(".task-edit", currObjParent).val();
-            $(".task", currObjParent).text(newTaskName);
-            $(".task-edit", currObjParent).hide();
-            $(".task", currObjParent).show();
-            $(currObj).html("Rename").removeClass("renaming");
-            $(currObjParent).removeClass("editing");
-            setTimeout(() => {
-              prepare_tasks_list();
-            }, 100);
+            if(newTaskName != ""){
+                $(".task", currObjParent).text(newTaskName);
+                $(".task-edit", currObjParent).hide();
+                $(".task", currObjParent).text($(".task-edit", currObjParent).val());
+                $(".task", currObjParent).show();
+                $(currObj).html('<svg width="24" height="24" ><use xlink:href="#rename-icon"></use></svg>').removeClass("renaming");
+                $(currObjParent).removeClass("editing");
+                setTimeout(() => {
+                    prepare_tasks_list();
+                }, 100);
+            }
           } else {
             $(".task-edit", currObjParent).val($(".task", currObjParent).text());
             $(".task", currObjParent).hide();
-            $(".task-edit", currObjParent).show();
+            $(".task-edit", currObjParent).show().focus();
             $(currObjParent).addClass("editing");
             $(currObj).html("Save").addClass("renaming");
           }          
