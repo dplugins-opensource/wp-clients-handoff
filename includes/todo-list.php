@@ -37,7 +37,6 @@ class WPCH_main {
     
         // Enqueue the custom CSS for the widget
         wp_enqueue_style( 'WPCH-clients-handoff-widget-style', WPCH_URL . 'css/todo-list.css', WPCH_PLUGINVERSION );
-        wp_enqueue_script( 'WPCH-alipine', WPCH_URL.'js/alpinejs_3.12.3.js', array('jquery'), WPCH_PLUGINVERSION );
         wp_enqueue_script( 'WPCH-sortable', WPCH_URL.'js/Sortable.min.js', array('jquery'), WPCH_PLUGINVERSION );
         wp_register_script( 'WPCH_ajax_scripts', WPCH_URL.'js/admin.js', array('jquery'), WPCH_PLUGINVERSION );
         wp_localize_script( 'WPCH_ajax_scripts', 'WPCH_ajax', array( 
