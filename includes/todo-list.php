@@ -29,6 +29,8 @@ class WPCH_main {
 	}
 
     public function WPCH_register_admin_widget() {
+        global $current_user;
+        if(!in_array('administrator', $current_user->roles) && !in_array('editor', $current_user->roles)) return;
         wp_add_dashboard_widget(
             'wpch_clients_handoff_widget',  // Widget ID
             'Website Todo list',  // Widget title
